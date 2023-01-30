@@ -2,11 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="community"><!-- 여기에 정의된 id를 그룹으로 묶어줍니다. -->
+<mapper namespace="communityComments"> <!-- 여기에 정의된 id를 그룹으로 묶어줍니다. -->
 	<insert id=""></insert>
-	<update id=""></update>
-	<select id=""></select>
-
-
+	<delete id=""></delete>
 </mapper>
- 
