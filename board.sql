@@ -1,30 +1,29 @@
 -- 메인글 테이블
-CREATE TABLE community(
-   idx number(10) NOT NULL,
-   writer varchar2(50) NOT NULL,         -- 작성자(로그인계정 정보 등)
-   title varchar2(100) NOT NULL,         -- 글제목
-   content varchar2(3000) NOT NULL,      -- 글내용
-   readCount number(10) DEFAULT '0',      -- 조회수
-   createdAt DATE DEFAULT sysdate,         -- 작성날짜와 시간 기본값
-   ip varchar2(15) DEFAULT '127.0.0.1',   -- 작성자 ip 
-   commentCount number(10) DEFAULT '0',   -- 댓글 갯수
-   PRIMARY KEY (idx)
-);
-
-CREATE SEQUENCE community_idx_seq;
-
+create table community(
+  idx number(10) NOT NULL,
+  writer varchar2(50) NOT NULL,     --작성자(로그인계정 정보 등)
+  title varchar2(100) NOT NULL ,	--글제목
+  content varchar2(3000) NOT NULL,	-- 글 내용
+  readCount number(10) default '0',    -- 조회수
+  createdAt date default sysdate,       -- 작성날짜와시간 기본값
+  ip varchar2(15) default '127.0.0.1',  -- 작성자 ip
+  commentCount number(10) default '0',   --댓글 갯수
+  primary key(idx)
+);  
+create SEQUENCE community_idx_seq;
 -- 댓글테이블
-CREATE TABLE communityComments(
-   idx number(10) NOT NULL,            -- 기본키
-   mref number(10) NOT NULL,            -- community 테이블의 idx 
-   writer varchar2(50) NOT NULL,         -- 작성자
-   content varchar2(1000) NOT NULL,      -- 댓글 내용
-   createdAt DATE DEFAULT sysdate,         -- 작성날짜와 시간 기본값
-   ip varchar2(15) DEFAULT '127.0.0.1',   -- 작성자 ip
-   heart number(3) DEFAULT '0',         -- 좋아요 갯수
-   PRIMARY KEY (idx)
+CREATE TABLE communityComments (
+	idx number(10) NOT NULL,   	-- 기본키
+	mref number(10) NOT NULL,   -- community 테이블의 idx	
+	writer varchar2(50) NOT NULL,	-- 작성자
+	content varchar2(1000) NOT NULL,  -- 댓글 내용
+	createdAt DATE default sysdate ,  -- 작성날짜와시간 기본값
+	ip varchar2(15) default '127.0.0.1',  -- 작성자 ip
+	heart number(3) default '0',	-- 좋아요 갯수
+	primary  key (idx)
 );
 CREATE SEQUENCE comment_idx_seq;
+
 -- 데이터 샘플 추가
 INSERT INTO community (idx,writer,title,content)
 VALUES (community_idx_seq.nextval, '김모모','알립니다.','오늘 모임 변경안내입니다.');
