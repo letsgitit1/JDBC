@@ -1,6 +1,7 @@
 package org.iclass.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.iclass.vo.Community;
@@ -39,7 +40,7 @@ public class CommunityDao {
 		return result;
 	}
 
-	public Community selectByIdx(int idx) {
+	public Community selectByIdx(long idx) {
 		SqlSession mapperSession = SqlSessionBean.getSession();
 		Community vo = mapperSession.selectOne("community.selectByIdx",idx);
 		mapperSession.close();
@@ -101,6 +102,14 @@ public class CommunityDao {
 	public List<Community> list() {
 		SqlSession mapperSession = SqlSessionBean.getSession();
 		List<Community> list = mapperSession.selectList("community.list");
+		mapperSession.close();
+		return list;
+	}
+
+	//메인글 목록 가져오기 - 할일 : 한번에(즉 한페이지에) 글 10개씩 가져오도록 변경  
+	public List<Community> pagelist(Map<String,Integer> map) {
+		SqlSession mapperSession = SqlSessionBean.getSession();
+		List<Community> list = mapperSession.selectList("community.pagelist",map);
 		mapperSession.close();
 		return list;
 	}

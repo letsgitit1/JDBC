@@ -27,6 +27,10 @@ public class UpdateController implements Controller{
 				.ip(temp)
 				.build();
 				dao.update(vo);
-			response.sendRedirect("read.jsp");
+		if(dao.update(vo)==1) {
+			response.sendRedirect("read?idx="+idx+"&page="+request.getParameter("page"));
+		}else {
+			response.sendRedirect(request.getContextPath());
+		}
 	}
 }

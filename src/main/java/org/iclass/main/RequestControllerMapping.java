@@ -2,9 +2,15 @@ package org.iclass.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.iclass.book.NewBookListController;
+import org.iclass.book.NewBookSaveController;
+import org.iclass.book.NewFormController;
 import org.iclass.community.CommentsController;
 import org.iclass.community.DeleteController;
 import org.iclass.community.ListController;
+import org.iclass.community.LoginActionController;
+import org.iclass.community.LoginViewController;
+import org.iclass.community.LogoutController;
 import org.iclass.community.ReadController;
 import org.iclass.community.UpdateController;
 import org.iclass.community.UpdateViewController;
@@ -32,9 +38,13 @@ public class RequestControllerMapping {
 		mapping.put(new RequestKeyValue("/member/modify","GET"), null);
 		mapping.put(new RequestKeyValue("/member/modify","POST"), null);
 		//로그인
-		mapping.put(new RequestKeyValue("/login", "GET"), null);
-		mapping.put(new RequestKeyValue("/login", "POST"), null);
-		mapping.put(new RequestKeyValue("/logout", "GET"), null);
+		mapping.put(new RequestKeyValue("/login", "GET"), new LoginViewController());
+		mapping.put(new RequestKeyValue("/login", "POST"), new LoginActionController());
+		mapping.put(new RequestKeyValue("/logout", "GET"), new LogoutController());
+		// 새로나온 책 (파일 업로드)
+	      mapping.put(new RequestKeyValue("/book/new","GET"), new NewFormController());
+	      mapping.put(new RequestKeyValue("/book/new","POST"), new NewBookSaveController());
+	      mapping.put(new RequestKeyValue("/book/list","GET"), new NewBookListController());
 	}
 	//url,method 필드를 저장하는 key 를 전달받아 HashMap에서 value(컨트롤러)를 리턴
 	public static Controller getController(RequestKeyValue key) {
